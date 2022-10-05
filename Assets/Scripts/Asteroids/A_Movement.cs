@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class A_Movement : MonoBehaviour
 {
@@ -25,9 +26,13 @@ public class A_Movement : MonoBehaviour
     private void Update()
     {
         //send back to object pool if scene changes and asteroid is on screen
-        if (ScoreManager.sceneChange && isActive)
+        string sceneName = SceneManager.GetActiveScene().name;
+        if (sceneName == "Menu")
         {
-            SendBackToPool();
+            if (isActive)
+            {
+                SendBackToPool();
+            }
         }
     }
     private void FixedUpdate()

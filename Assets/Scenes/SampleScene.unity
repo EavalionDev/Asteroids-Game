@@ -310,9 +310,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: '0
-
-'
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: d0a43c61947b89a418362846fe33c072, type: 2}
   m_sharedMaterial: {fileID: -7725876501155977956, guid: d0a43c61947b89a418362846fe33c072, type: 2}
@@ -339,7 +337,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 47.95
+  m_fontSize: 50
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -3153,7 +3151,7 @@ GameObject:
   - component: {fileID: 864773643}
   m_Layer: 5
   m_Name: Game Over Canvas
-  m_TagString: Untagged
+  m_TagString: GameOverCanvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3798,7 +3796,7 @@ GameObject:
   - component: {fileID: 987039902}
   m_Layer: 5
   m_Name: Score Text
-  m_TagString: Untagged
+  m_TagString: GameOverScoreText
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

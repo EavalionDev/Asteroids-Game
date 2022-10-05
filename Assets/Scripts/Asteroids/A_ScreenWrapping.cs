@@ -6,13 +6,12 @@ public class A_ScreenWrapping : MonoBehaviour
 {
     private Camera cam;
     [SerializeField] private MeshRenderer asteroidRenderer;
-    [SerializeField] private bool onScreen, inPlay, wrappingX, wrappingY, resetUponSceneChange;
+    [SerializeField] private bool onScreen, inPlay, wrappingX, wrappingY;
     private Vector2 screenPos, newPos;
 
     // Start is called before the first frame update
     void Start()
     {
-        resetUponSceneChange = false;
         inPlay = false;
         onScreen = true;
         cam = GameObject.FindWithTag("MainCamera").GetComponent<Camera>();

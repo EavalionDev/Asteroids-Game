@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class A_CollisionManager : MonoBehaviour
 {
-    private ScoreManager scoreClass;
     private A_Movement movementClass;
     private ParticleSystem bigAsteroidParticle;
     private ParticleSystem mediumAsteroidParticle;
@@ -15,7 +14,6 @@ public class A_CollisionManager : MonoBehaviour
 
     private void Start()
     {
-        scoreClass = GameObject.FindWithTag("ScoreObject").GetComponent<ScoreManager>();
         movementClass = GetComponent<A_Movement>();
         bigIndex = 0;
         mediumIndex = 0;
@@ -37,7 +35,7 @@ public class A_CollisionManager : MonoBehaviour
                 bigAsteroidParticle.Play();
                 bigIndex++;
                 A_SpawningManager.SpawnMediumAsteroids(gameObject);
-                scoreClass.AddLargeScore();
+                ScoreManager.Instance.AddLargeScore();
             }
             //Asteroids hit by bullets are sent back to object pools, medium asteroids spawn 2 small ones
             else if (gameObject.tag == "mediumAsteroid")
@@ -51,7 +49,7 @@ public class A_CollisionManager : MonoBehaviour
                 mediumAsteroidParticle.Play();
                 mediumIndex++;
                 A_SpawningManager.SpawnSmallAsteroids(gameObject);
-                scoreClass.AddMediumScore();
+                ScoreManager.Instance.AddMediumScore();
             }
             //Asteroids hit by bullets are sent back to object pools
             else if (gameObject.tag == "smallAsteroid")
@@ -64,10 +62,13 @@ public class A_CollisionManager : MonoBehaviour
                 smallAsteroidParticle.transform.position = transform.position;
                 smallAsteroidParticle.Play();
                 smallIndex++;
-                scoreClass.AddSmallScore();
+                ScoreManager.Instance.AddSmallScore();
             }
+            //Send bullet back to object pool
             collision.GetComponent<B_Movement>().SendBackToPool();
+            //Send asteroid back to object pool
             movementClass.SendBackToPool();
+            //Play destroy sound
             SoundManager.Instance.PlayAsteroidDestroySound();
         }
     }

@@ -5,6 +5,7 @@ using UnityEngine;
 public class P_MoveForward : MonoBehaviour
 {
     public static bool playerNotHit;
+    public static bool clearWingTrails;
     public static bool livesRemaining;
     public TrailRenderer leftWingTrail;
     public TrailRenderer rightWingTrail;
@@ -19,6 +20,7 @@ public class P_MoveForward : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        clearWingTrails = false;
         livesRemaining = true;
         startingPosition = transform.position;
         playerNotHit = true;
@@ -31,6 +33,23 @@ public class P_MoveForward : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Turn wing trails on and off
+        if (P_ScreenWrapping.isWrapping)
+        {
+            TurnOffWingsTrails();
+        }
+        else
+        {
+            if (moveForward && !clearWingTrails)
+            {
+                TurnOnWingTrails();
+            }
+            else
+            {
+                TurnOffWingsTrails();
+            }
+        }
+
         //No lives remaining and has been reset
         if (!livesRemaining && playerReset)
         {
@@ -62,24 +81,7 @@ public class P_MoveForward : MonoBehaviour
         {
             //Sets bool states based on input
             moveForward = Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow);
-        }
-
-        //Turn wing trails on and off
-        if (P_ScreenWrapping.isWrapping)
-        {
-            TurnOffWingsTrails();
-        }
-        else
-        {
-            if (moveForward)
-            {
-                TurnOnWingTrails();
-            }
-            else
-            {
-                TurnOffWingsTrails();
-            }
-        }
+        } 
 
     }
     private void FixedUpdate()
@@ -103,6 +105,7 @@ public class P_MoveForward : MonoBehaviour
         }
     }
 
+    //Turns on wing trails
     void TurnOnWingTrails()
     {
         if (leftWingTrail.emitting)
@@ -115,13 +118,14 @@ public class P_MoveForward : MonoBehaviour
             rightWingTrail.emitting = true;
         }
     }
+    //Turns wing trails off
     void TurnOffWingsTrails()
     {
         if (!leftWingTrail.emitting)
         {
             return;
         }
-        else if (P_ScreenWrapping.isWrapping)
+        else if (P_ScreenWrapping.isWrapping || clearWingTrails)
         {
             leftWingTrail.Clear();
             rightWingTrail.Clear();
@@ -146,6 +150,7 @@ public class P_MoveForward : MonoBehaviour
         playerReset = false;
         yield return new WaitForSeconds(1f);
         col.enabled = true;
+        clearWingTrails = false;
     }
     //Player has 0 lives left, stop moving, turn off renderer and disable collider
     void PlayerDied()

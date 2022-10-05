@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3753403255822244894}
   - component: {fileID: 2106691098377588926}
   - component: {fileID: 5516258387343890084}
-  - component: {fileID: 3552399894703496086}
+  - component: {fileID: 2096218018480888848}
   m_Layer: 0
   m_Name: Medium Asteroid
   m_TagString: mediumAsteroid
@@ -104,9 +104,8 @@ MonoBehaviour:
   inPlay: 0
   wrappingX: 0
   wrappingY: 0
-  resetUponSceneChange: 0
---- !u!70 &3552399894703496086
-CapsuleCollider2D:
+--- !u!58 &2096218018480888848
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -118,9 +117,9 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0025711006, y: -0.047569282}
-  m_Size: {x: 0.9254358, y: 0.9254358}
-  m_Direction: 1
+  m_Offset: {x: 0.030204773, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.3074417
 --- !u!1001 &7584021528437325890
 PrefabInstance:
   m_ObjectHideFlags: 0
